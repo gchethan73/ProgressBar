@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html ng-app="progressBars">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="Scripts/app/progressBars.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/app.css" rel="stylesheet" />
+</head>
+<body>    
+    <div ng-controller="ProgressBarCtrl">
+        <div id="barcontainer" ng-repeat="bar in bars track by $index">
+            <span> {{'Progress Bar : ' + $index}} </span>
+            <uib-progressbar max="limit" value="bar" type="{{(bar > limit ) ? 'danger' : 'success'}}">
+                <span class="pb-span"> {{bar}} </span>
+            </uib-progressbar>
+        </div>
+        <div class="row">
+            <div id="dropDownlist" class="form-group col-md-4">
+                <label for="comment">Select a ProgressBar:</label>
+                <select id="eventType_autocomplete" class="form-control"
+                        ng-options="eventType.dropDownText for eventType in barArray track by eventType.dropDownValue"
+                        ng-model="selectedProgressBar"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div ng-repeat="btn in buttons">
+                <button type="button" style="margin:10px;" class="btn btn-sm btn-primary pull-left" ng-click="ChangeValue(btn);">
+                {{(btn > 0 )? '+' + btn : btn}}
+                </button>
+            </div>
+        </div>
+       
+    </div>
+</body>
+</html>
